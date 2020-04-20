@@ -31,6 +31,9 @@ Repositório público para que qualquer um possa ter um blog com diversas utilid
 
 Neste projeto, estou utilizando Typescript, express, uuid, prettier, eslint. Utilizando os conceitos de SOLID, com repositories, services, models e routes para separar as diversas responsabilidades de rotas, negócios e repositório.
 
+Banco postgres alocado em container Docker
+ORM -> typeORM
+
 
 ## Para rodar este projeto em sua máquina local
 
