@@ -2,13 +2,13 @@
 ![github-small](https://twilio-cms-prod.s3.amazonaws.com/images/s2-0wBJwglXgY-J1SEQqjxzePIRwX0hewng9LVRP7tyf2K.width-808.png)
 
 <p align="center">
-  <b>Backend de um blog pessoal</b><br><br>
+  <b>Backend de um blog pessoal **em construção**</b><br><br>
   <b>“Para quem fica melhor a cada dia, ficar pronto é utopia”!</b>
 </p>
 
 ## Sobre a API
 A API será construída para possuir as rotas:
-+ /about 
++ /about
 + /about/techs
 + /about/techs/id
 + /about/resume
