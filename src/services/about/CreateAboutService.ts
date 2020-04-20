@@ -1,5 +1,6 @@
+import { getCustomRepository } from 'typeorm';
 import About from '../../models/About';
-import AboutRepositories from '../../repositories/AboutRepositories';
+import AboutRepository from '../../repositories/AboutRepository';
 
 interface Request {
   title: string;
@@ -8,14 +9,14 @@ interface Request {
 }
 
 class CreateAboutService {
-  private aboutRepositories: AboutRepositories;
-
-  constructor(aboutRepositories: AboutRepositories) {
-    this.aboutRepositories = aboutRepositories;
-  }
-
-  public execute({ title, text, url }: Request): About {
-    const about = this.aboutRepositories.create({ title, url, text });
+  public async execute({ title, text, url }: Request): Promise<About> {
+    const aboutRepository = getCustomRepository(AboutRepository);
+    const about = await aboutRepository.create({
+      title,
+      text,
+      url,
+    });
+    await aboutRepository.save(about);
     return about;
   }
 }

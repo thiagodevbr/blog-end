@@ -1,18 +1,13 @@
-import AboutRepositories from '../../repositories/AboutRepositories';
+import { getCustomRepository } from 'typeorm';
+import AboutRepository from '../../repositories/AboutRepository';
 
 interface Request {
   id: string;
 }
 class RemoveAboutServices {
-  private aboutRepositories: AboutRepositories;
-
-  constructor(aboutRepositories: AboutRepositories) {
-    this.aboutRepositories = aboutRepositories;
-  }
-
-  public execute({ id }: Request): null {
-    this.aboutRepositories.delete({ id });
-    return null;
+  public async execute({ id }: Request): Promise<void> {
+    const removeRepository = getCustomRepository(AboutRepository);
+    await removeRepository.delete(id);
   }
 }
 

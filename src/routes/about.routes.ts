@@ -1,27 +1,28 @@
 import { Router } from 'express';
-import AboutRepositories from '../repositories/AboutRepositories';
+import { getCustomRepository } from 'typeorm';
+import AboutRepository from '../repositories/AboutRepository';
 import CreateAboutServices from '../services/about/CreateAboutService';
 import RemoveAboutServices from '../services/about/RemoveAboutServices';
 
 const aboutRouter = Router();
-const aboutRepositories = new AboutRepositories();
 
-aboutRouter.get('/', (_, response) => {
-  const about = aboutRepositories.all();
-  return response.json(about);
+aboutRouter.get('/', async (request, response) => {
+  const aboutRepository = getCustomRepository(AboutRepository);
+  const aboutList = await aboutRepository.find();
+  return response.json(aboutList);
 });
 
-aboutRouter.post('/', (request, response) => {
+aboutRouter.post('/', async (request, response) => {
   const { title, text, url } = request.body;
-  const createAbout = new CreateAboutServices(aboutRepositories);
-  const about = createAbout.execute({ title, text, url });
+  const createAbout = new CreateAboutServices();
+  const about = await createAbout.execute({ title, text, url });
   return response.json(about);
 });
 
-aboutRouter.delete('/:id', (request, response) => {
+aboutRouter.delete('/:id', async (request, response) => {
   const { id } = request.params;
-  const deleteAbout = new RemoveAboutServices(aboutRepositories);
-  deleteAbout.execute({ id });
+  const removeAbout = new RemoveAboutServices();
+  await removeAbout.execute({ id });
   return response.json();
 });
 
